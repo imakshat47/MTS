@@ -1,7 +1,8 @@
-try:    
-    from flask import Flask, json, make_response           
+try:
+    from flask import Flask, json, make_response
     from mts import MTS
     from key import _app_debug
+    from os import environ
 except ModuleNotFoundError as e:
     print("Missing required library:- "+str(e))
 
@@ -9,10 +10,14 @@ except ModuleNotFoundError as e:
 app = Flask(__name__)
 
 # Json Dump
+
+
 def jd(obj):
     return json.dumps(obj)
 
 # Response
+
+
 def response(data={}, code=200):
     resp = {
         "code": code,
@@ -24,6 +29,7 @@ def response(data={}, code=200):
     response.headers['Access-Control-Allow-Origin'] = "*"
     return response
 
+
 """ APP APIs
     text: imput text
     lang: Tragat language
@@ -31,19 +37,24 @@ def response(data={}, code=200):
 Returns:
     Json response
 """
+
+
 @app.route('/<text>', methods=['GET', 'POST'])
 @app.route('/<text>/<lang>', methods=['GET', 'POST'])
 @app.route('/<text>/<lang>/<inter_lang>', methods=['GET', 'POST'])
 def scatterchart(text, lang='en', inter_lang='hi'):
     _mts = MTS()
     output_text = _mts.translate(text, lang, inter_lang)
-    return response({"text":text, "output": output_text, "lang": lang, "intermediate_lang": inter_lang})
+    return response({"text": text, "output": output_text, "lang": lang, "intermediate_lang": inter_lang})
 
 # Error handing
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return response({}, 404)
 
+
 # Driver Method
 if __name__ == '__main__':
-    app.run(port = int(os.environ.get('PORT', 33507)), debug=_app_debug)
+    app.run(port=int(environ.get('PORT', 14436)), debug=_app_debug)
