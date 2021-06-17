@@ -2,3 +2,5 @@
 .vscode
 #  Python cache
 __pycache__
+# virtual env
+env

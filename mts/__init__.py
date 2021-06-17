@@ -53,7 +53,7 @@ class Cleaner(object):
 
     # Cleans text message
     """ clean function removes all extra symbols, unwanted noise, urls and username from input test if present and
-        returns a clean text as output. 
+        returns a clean text as output.
     """
 
     def _clean(self, preprocess_text):
@@ -144,7 +144,7 @@ class Cleaner(object):
 
     # Handle Coded Emojies
         """ Handle Codee Emojis using the unicodes removes the unwanted emoticons.
-            prerocessed_text a noise free test with emoticons that neeced to be removed.        
+            prerocessed_text a noise free test with emoticons that neeced to be removed.
             Returns:
              string: preprocessed_text clean text after processing.
         """
@@ -938,7 +938,7 @@ class API(object):
     def __del__(self):
         _debug and print("API"+_distructed_cls_msg)
 
-    def get_translate(self, input_text='', target_language='en', intermediate_language='en'):
+    def get_translate(self, input_text='', target_language='en', intermediate_language='ur'):
         # request input_text/target_language/intermediate_language
         _uri = "https://mtsys.herokuapp.com/" + \
             input_text.replace(" ", "%20") + '/' + \
@@ -952,7 +952,7 @@ class API(object):
                 return res['output']
         except Exception as e:
             _debug and print("API Exception: ", e)
-        return ""
+        return input_text
 
 
 """
@@ -969,51 +969,61 @@ class MTS(Cleaner, API):
     def __del__(self):
         _debug and print("MTS"+_distructed_cls_msg)
 
-    def translate(self, input_text='', target_language='en', intermediate_language='en'):
+    def translate(self, input_text='', target_language='en', intermediate_language='hi'):
         if input_text == None:
             return None
 
         _debug and print("Text Cleaning: ", input_text)
+        _debug and print("Traget Language: ", target_language)
+        _debug and print("Intermediate Language: ", intermediate_language)
+        
         input_text = self._clean(input_text)
 
         _debug and print("Text Demoj: ", input_text)
         input_text = self._demojis(input_text, True)
 
-        _debug and print("Translating: ", input_text)        
-        _debug and print("Corrected Translating: ", input_text)
-        input_text = self.get_translate(input_text, target_language, intermediate_language)
-        
+        _debug and print("Translating: ", input_text)
+        input_text = self.get_translate(
+            input_text, target_language, intermediate_language)
+        _debug and print("API Translated: ", input_text)
+        flag = False
+        try:
+            input_text = self.__google_translator.translate(
+                input_text, lang_tgt=intermediate_language)
+            _debug and print("Intermediate Translation: ", input_text)
+            input_text = self.__google_translator.translate(
+                input_text, lang_tgt=target_language)
+            _debug and print("Intermediate Translation: ", input_text)
+        except Exception as e:
+            flag = flag ^ True
+            _debug and print("Exception: ", e)
         try:
             _translated = self.__translator.translate(
                 input_text, dest=intermediate_language)
             input_text = _translated.text
             _debug and print("Intermediate Translation: ", input_text)
-
             _translated = self.__translator.translate(
                 input_text, dest=target_language)
             input_text = _translated.text
             _debug and print("Intermediate Translation: ", input_text)
-        except:
-            try:
-                input_text = self.__google_translator.translate(
-                    input_text, lang_tgt=intermediate_language)
-                _debug and print("Intermediate Translation: ", input_text)
-                input_text = self.__google_translator.translate(
-                    input_text, lang_tgt=target_language)
-                _debug and print("Intermediate Translation: ", input_text)
-            except:
-                try:
-                    _gs = goslate.Goslate()
-                    input_text = _gs.translate(input_text, target_language)
-                    _debug and print("Intermediate Translation: ", input_text)
-                except:
-                    try:
-                        input_text = str(
-                            TextBlob(input_text).translate(to=target_language))
-                        _debug and print(
-                            "Text Intermediate Translation: ", input_text)
-                    except:
-                        _debug and print("Exception: All Models Failed!!")
+        except Exception as e:
+            flag = flag ^ True
+            _debug and print("Exception: ", e)
+        try:
+            _gs = goslate.Goslate()
+            input_text = _gs.translate(input_text, target_language)
+            _debug and print("Intermediate Translation: ", input_text)
+        except Exception as e:
+            flag = flag ^ True
+            _debug and print("Exception: ", e)
+        try:
+            input_text = str(TextBlob(input_text).translate(to=target_language))
+            _debug and print("Text Intermediate Translation: ", input_text)
+        except Exception as e:
+            flag = flag ^ True
+            _debug and print("Exception: ", e)
+        if(flag):
+            _debug and print("Exception: All Models Failed!!")
         # Base Models
-        _debug and print("Text Correct: ", input_text)        
+        _debug and print("Text Translated: ", input_text)
         return input_text

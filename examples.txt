@@ -1,3 +1,10 @@
+Enter text here:  Hamesha Ladki ke aankho se aankhen milakar hi baat kare, isse Ladkiyan impress hoti hai.
+Enter target Language: 
+Enter intermediate Language (If any): 
+Output Result:  Always talk to the eyes with the girl's eyes, it is impressed by the girls. 
+
+
+
 Enter text here: BREAKING NEWS: Nyiragongo Volcano Erupts in #Goma, DR Congo. https://t.co/0Pn1FvLASy 
 Enter target Language: en
 Output Result:  breaking news nyiragongo volcano erupts in coma dr cong 
@@ -8,6 +15,14 @@ Enter text here: Maximum Ladkiyan Clean shave kiye hue Ladko ko Like karti hai.
 Enter target Language: en
 Enter intermediate Language (If any): 
 Output Result:  Maximum girls like clean shaved boys 
+
+
+
+Enter text here: unka Birth day kabhi naa bhule aur unhe koi Beautiful gift jarur de, yaa ek Rose.
+Enter target Language: 
+Enter intermediate Language (If any): 
+Output Result:  Do not forget their berth day and give them a beautiful gift or a day 
+
 
 
 Enter text here:  Facebook Profile kya hoti hai wo to aapko pata hoga or uski kuch limitation bhi hoti hai jese aap Facebook Profile me 5000 se jada friends nahi bana sakte.
@@ -21,6 +36,13 @@ Enter text here: Office ki fileon ko idhar udhar mix kardo.
 Enter target Language: en
 Enter intermediate Language (If any): 
 Output Result:  Mix the office files around 
+
+
+
+Enter text here: Hamesha unki help ke liye taiyaar rahe.
+Enter target Language: 
+Enter intermediate Language (If any): 
+Output Result:  Always ready for their help 
 
 
 
@@ -42,3 +64,27 @@ Enter text here: Is Article me me aapko bataoga ki aap kaise Facebook Profile ko
 Enter target Language: en
 Enter intermediate Language (If any): 
 Output Result:  In this article you will tell how you can change the Facebook profile into the page 
+
+Enter text here: Hello Friends, Agar aap ye Post Padh rahe hai iska Matlab aapka Facebook par account to jarur hoga
+Enter target Language: 
+Enter intermediate Language (If any): 
+MTS Initaited !!
+Text Cleaning:  Hello Friends, Agar aap ye Post Padh rahe hai iska Matlab aapka Facebook par account to jarur hoga
+Cleaned Text:  hello friends agar aap ye post padh rahe hai iska matlab aapka facebook par account to jarur hoga
+Text Demoj:  hello friends agar aap ye post padh rahe hai iska matlab aapka facebook par account to jarur hoga
+Demoji Text:  hello friends agar aap ye post padh rahe hai iska matlab aapka facebook par account to jarur hoga
+Emoticons removed Text:  hello friends agar aap ye post padh rahe hai iska matlab aapka facebook par account to jarur hoga
+Translating:  hello friends agar aap ye post padh rahe hai iska matlab aapka facebook par account to jarur hoga
+Corrected Translating:  hello friends agar aap ye post padh rahe hai iska matlab aapka facebook par account to jarur hoga
+API URI:  https://mtsys.herokuapp.com/hello%20friends%20agar%20aap%20ye%20post%20padh%20rahe%20hai%20iska%20matlab%20aapka%20facebook%20par%20account%20to%20jarur%20hoga/en/hi
+Intermediate Translation:  हेल्लो फ्रेंड्स अगर आप ये पोस्ट पढ़ रहे है इसका मतलब आपका फेसबुक पर अकाउंट तो जरुर होगा 
+Intermediate Translation:  Hello Friends If you are reading these posts, it will definitely be an account on your Facebook 
+Text Correct:  Hello Friends If you are reading these posts, it will definitely be an account on your Facebook 
+Output Result:  Hello Friends If you are reading these posts, it will definitely be an account on your Facebook
+MTS Instance Removed !!
+
+
+Enter text here: Friendship aur Valentines day ko unhe hamesha wish kare aur ek Pyara sa Gift jarur de. 
+Enter target Language: en
+Enter intermediate Language (If any): hi
+Output Result:  Friendship and Valentines Day always wish them and give a lovely gift 
