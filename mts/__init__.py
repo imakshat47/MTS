@@ -9,12 +9,14 @@
 try:
     import re
     import string
-    import demoji    
+    import demoji
     from googletrans import Translator
     from google_trans_new import google_translator
     from textblob import TextBlob
     from translate import Translator as trans
-    import goslate    
+    import goslate
+    import requests
+    import json
     from key import _debug
 except ModuleNotFoundError as e:
     print("Missing required library:- "+str(e))
@@ -100,7 +102,7 @@ class Cleaner(object):
             preprocess_text = re.sub(r'https', ' ', preprocess_text)
             preprocess_text = re.sub(r'url', ' ', preprocess_text)
             preprocess_text = re.sub(r'USER_MENTION', ' ', preprocess_text)
-            
+
             preprocess_text = preprocess_text.strip('    ')
             _debug and print("Cleaned Text: ", preprocess_text)
         except Exception as e:
@@ -936,13 +938,29 @@ class API(object):
     def __del__(self):
         _debug and print("API"+_distructed_cls_msg)
 
+    def get_translate(self, input_text='', target_language='en', intermediate_language='en'):
+        # request input_text/target_language/intermediate_language
+        _uri = "https://mtsys.herokuapp.com/" + \
+            input_text.replace(" ", "%20") + '/' + \
+            target_language+'/'+intermediate_language
+        _debug and print("API URI: ", _uri)
+        try:
+            r = requests.get(_uri, headers={'accept': 'application/json'})
+            if r.status_code == 200:
+                res = r.json()['data']
+                _debug and print("API Response: ", res)
+                return res['output']
+        except Exception as e:
+            _debug and print("API Exception: ", e)
+        return ""
+
 
 """
     MTS Class inherted API class.
 """
 
 
-class MTS(Cleaner,API):
+class MTS(Cleaner, API):
     def __init__(self):
         self.__translator = Translator()
         self.__google_translator = google_translator()
@@ -951,31 +969,37 @@ class MTS(Cleaner,API):
     def __del__(self):
         _debug and print("MTS"+_distructed_cls_msg)
 
-    def translate(self, input_text='',target_language='en', intermediate_language='en'):        
+    def translate(self, input_text='', target_language='en', intermediate_language='en'):
         if input_text == None:
             return None
-        
+
         _debug and print("Text Cleaning: ", input_text)
         input_text = self._clean(input_text)
 
         _debug and print("Text Demoj: ", input_text)
-        input_text = self._demojis(input_text, True)        
+        input_text = self._demojis(input_text, True)
 
-        input_text = str(TextBlob(input_text).correct())        
-        _debug and print("Translating: ",input_text)
+        _debug and print("Translating: ", input_text)        
+        _debug and print("Corrected Translating: ", input_text)
+        input_text = self.get_translate(input_text, target_language, intermediate_language)
+        
         try:
-            _translated = self.__translator.translate(input_text, dest=intermediate_language)
+            _translated = self.__translator.translate(
+                input_text, dest=intermediate_language)
             input_text = _translated.text
             _debug and print("Intermediate Translation: ", input_text)
-            
-            _translated = self.__translator.translate(input_text, dest=target_language)
+
+            _translated = self.__translator.translate(
+                input_text, dest=target_language)
             input_text = _translated.text
             _debug and print("Intermediate Translation: ", input_text)
         except:
             try:
-                input_text = self.__google_translator.translate(input_text, lang_tgt=intermediate_language)
-                _debug and print("Intermediate Translation: ", input_text)                
-                input_text = self.__google_translator.translate(input_text, lang_tgt=target_language)
+                input_text = self.__google_translator.translate(
+                    input_text, lang_tgt=intermediate_language)
+                _debug and print("Intermediate Translation: ", input_text)
+                input_text = self.__google_translator.translate(
+                    input_text, lang_tgt=target_language)
                 _debug and print("Intermediate Translation: ", input_text)
             except:
                 try:
@@ -984,12 +1008,12 @@ class MTS(Cleaner,API):
                     _debug and print("Intermediate Translation: ", input_text)
                 except:
                     try:
-                        input_text = str(TextBlob(input_text).translate(to=target_language))
+                        input_text = str(
+                            TextBlob(input_text).translate(to=target_language))
                         _debug and print(
                             "Text Intermediate Translation: ", input_text)
                     except:
                         _debug and print("Exception: All Models Failed!!")
         # Base Models
-        input_text = str(TextBlob(input_text).correct())
-        _debug and print("Text Correct: ", input_text)
+        _debug and print("Text Correct: ", input_text)        
         return input_text

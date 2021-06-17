@@ -1,0 +1,44 @@
+Enter text here: BREAKING NEWS: Nyiragongo Volcano Erupts in #Goma, DR Congo. https://t.co/0Pn1FvLASy 
+Enter target Language: en
+Output Result:  breaking news nyiragongo volcano erupts in coma dr cong 
+
+
+
+Enter text here: Maximum Ladkiyan Clean shave kiye hue Ladko ko Like karti hai. 
+Enter target Language: en
+Enter intermediate Language (If any): 
+Output Result:  Maximum girls like clean shaved boys 
+
+
+Enter text here:  Facebook Profile kya hoti hai wo to aapko pata hoga or uski kuch limitation bhi hoti hai jese aap Facebook Profile me 5000 se jada friends nahi bana sakte.
+Enter target Language: 
+Enter intermediate Language (If any): 
+Output Result:  What is the Facebook Profile? You will know and some limitations also that you can not make more than 500 friends in Facebook profile 
+
+
+
+Enter text here: Office ki fileon ko idhar udhar mix kardo.                                                                                            
+Enter target Language: en
+Enter intermediate Language (If any): 
+Output Result:  Mix the office files around 
+
+
+
+Enter text here:  Apne office ke kisi aadmi ke naam se sabke liye pizza mangvalo, tumhari pet pooja ho jayegi aur uski jeb dhili.
+Enter target Language: 
+Enter intermediate Language (If any): 
+Output Result:  Pizza Mangwalo will be worshiped for everyone by the name of a man of his office and his pocket loose 
+
+
+
+Enter text here: Chupke se kisi sahyogi ka khaane ka dabba khali kardo ek thaili mein.
+Enter target Language: en
+Enter intermediate Language (If any): 
+Output Result:  Quietly empty a collaborative dinner in a pouch 
+
+
+
+Enter text here: Is Article me me aapko bataoga ki aap kaise Facebook Profile ko Page me Badal sakte hai.
+Enter target Language: en
+Enter intermediate Language (If any): 
+Output Result:  In this article you will tell how you can change the Facebook profile into the page 
