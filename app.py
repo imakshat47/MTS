@@ -34,7 +34,7 @@ Returns:
 @app.route('/<text>', methods=['GET', 'POST'])
 @app.route('/<text>/<lang>', methods=['GET', 'POST'])
 @app.route('/<text>/<lang>/<inter_lang>', methods=['GET', 'POST'])
-def scatterchart(text, lang='en', inter_lang='hi'):
+def myMTS(text, lang='en', inter_lang='hi'):
     _mts = MTS()
     output_text = _mts.translate(text, lang, inter_lang)
     return response({"text":text, "output": output_text, "lang": lang, "intermediate_lang": inter_lang})
